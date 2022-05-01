@@ -8,19 +8,22 @@ const app = express();
 app.use(cors())
 app.use(express.json())
 
-// const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.tw6gw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-// client.connect(err => {
-//     const collection = client.db("test").collection("devices");
-//     // perform actions on the collection object
-//     client.close();
-// });
+
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.vvsc7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 async function run() {
     try {
         await client.connect();
+        const carCollections = client.db('XtremeCar').collection('cars')
+
+        // all cars api
+        app.get('/cars', async(req, res)=>{
+            const query = {};
+            const cursor = carCollections.find(query);
+            const cars = await cursor.toArray();
+            res.send(cars)
+        })
 
     }
     finally {
