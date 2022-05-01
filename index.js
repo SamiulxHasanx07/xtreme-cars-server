@@ -25,6 +25,23 @@ async function run() {
             res.send(cars)
         })
 
+        // Cars Post API Done 
+        // data format:
+        // {
+        //     name: 'test',
+        //     image: "''",
+        //     des: "''",
+        //     price: '345000',
+        //     qty: '80',
+        //     supplier: '"tesla"',
+        //     _id: new ObjectId("626e6a21ff77b72c788e3004")
+        //   }
+        app.post('/cars', async(req, res)=>{
+            const data = req.query;
+            const result = await carCollections.insertOne(data);
+            res.send(result)
+        })
+
     }
     finally {
 
