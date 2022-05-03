@@ -25,19 +25,17 @@ async function run() {
             res.send(cars)
         })
 
-        // Cars Post API Done 
-        // data format:
+        // Data format
         // {
-        //     name: 'test',
-        //     image: "''",
-        //     des: "''",
-        //     price: '345000',
-        //     qty: '80',
-        //     supplier: '"tesla"',
-        //     _id: new ObjectId("626e6a21ff77b72c788e3004")
-        //   }
+        //     "name":"Honda Civic 2022",
+        //     "images":"https://raw.githubusercontent.com/SamiulxHasanx07/xtreme-cars-images/main/cars/2022-honda-civic.jpg",
+        //     "price":"35000",
+        //     "qty":"80",
+        //     "supplie": "Honda",
+        //     "des":"Best wolrd wide car brand and car provider"
+        //     }
         app.post('/cars', async(req, res)=>{
-            const data = req.query;
+            const data = req.body;
             const result = await carCollections.insertOne(data);
             res.send(result)
         })
