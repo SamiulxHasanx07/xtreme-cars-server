@@ -26,6 +26,15 @@ async function run() {
             res.send(cars)
         })
 
+        //single car api
+        //http://localhost:5000/car/id
+        app.get('/car/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id)};
+            const result = await carCollections.findOne(query);
+            res.send(result);
+        })
+
         // Post API
         // Data format
         // {
@@ -59,7 +68,6 @@ async function run() {
             console.log(id);
             const car = req.body;
             const { name, img, price, qty, supplier, brand, des } = car;
-            console.log(car);
             const filter = { _id: ObjectId(id) };
             const options = { upsert: true };
             const updateDoc = {
@@ -68,7 +76,7 @@ async function run() {
                 },
             };
             const result = await carCollections.updateOne(filter, updateDoc, options);
-            res.send(result)
+            res.send(result);
         })
     }
     finally {
