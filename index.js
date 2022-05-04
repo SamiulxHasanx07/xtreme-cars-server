@@ -65,7 +65,6 @@ async function run() {
         // Update Car Details API
         app.put('/car/:id', async (req, res) => {
             const id = req.params.id;
-            console.log(id);
             const car = req.body;
             const { name, img, price, qty, supplier, brand, des } = car;
             const filter = { _id: ObjectId(id) };
@@ -86,10 +85,8 @@ async function run() {
         // }
         app.put('/carqty/:id', async (req, res)=>{
             const id = req.params.id;
-            console.log(id);
             const data = req.body;
             const {newQty} =  data;
-            console.log(data);
             const filter = {_id:ObjectId(id)};
             const options = {upsert:true}
             const updateDoc = {
@@ -99,6 +96,16 @@ async function run() {
             }
             const result = await carCollections.updateOne(filter, updateDoc, options)
             res.send(result);
+        })
+
+        // Delete Car
+        app.delete('/car', async(req, res)=>{
+            const id = req.query._id;
+            const filter =  {_id:ObjectId(id)}
+            const result =  await carCollections.deleteOne(filter);
+            res.send(result)
+            console.log(id);
+            
         })
     }
     finally {
