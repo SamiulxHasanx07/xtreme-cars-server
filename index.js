@@ -78,6 +78,28 @@ async function run() {
             const result = await carCollections.updateOne(filter, updateDoc, options);
             res.send(result);
         })
+
+        // update single car qty
+        // data format
+        // {
+        //     "newQty":"50"
+        // }
+        app.put('/carqty/:id', async (req, res)=>{
+            const id = req.params.id;
+            console.log(id);
+            const data = req.body;
+            const {newQty} =  data;
+            console.log(data);
+            const filter = {_id:ObjectId(id)};
+            const options = {upsert:true}
+            const updateDoc = {
+                $set:{
+                    qty: newQty
+                }
+            }
+            const result = await carCollections.updateOne(filter, updateDoc, options)
+            res.send(result);
+        })
     }
     finally {
 
