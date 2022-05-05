@@ -35,6 +35,15 @@ async function run() {
             res.send(result);
         })
 
+        // my item api
+        app.get('/myitems', async(req, res)=>{
+            const searchData = req.body.email;
+            const query = {email: searchData};
+            const cursor = carCollections.find(query);
+            const result = await cursor.toArray();
+            res.send(result);
+        })
+
         // Post API
         // Data format
         // {
@@ -42,11 +51,11 @@ async function run() {
         //     "img":"https://raw.githubusercontent.com/SamiulxHasanx07/xtreme-cars-images/main/cars/2022-honda-civic.jpg",
         //     "price":"35000",
         //     "qty":"80",
-        //     "supplie": "Honda",
+        //     "supplier": "Honda",
         //     "brand": "Honda"
         //     "des":"Best wolrd wide car brand and car provider"
         //     }
-        app.post('/cars', async (req, res) => {
+        app.post('/car', async (req, res) => {
             const data = req.body;
             const result = await carCollections.insertOne(data);
             res.send(result)
