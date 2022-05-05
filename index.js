@@ -36,8 +36,8 @@ async function run() {
         })
 
         // my item api
-        app.get('/myitems', async(req, res)=>{
-            const searchData = req.body.email;
+        app.get('/myitems/:email', async(req, res)=>{
+            const searchData = req.params.email;
             const query = {email: searchData};
             const cursor = carCollections.find(query);
             const result = await cursor.toArray();
