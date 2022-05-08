@@ -17,16 +17,13 @@ function verifyJWT(req, res, next) {
     }
 
     const token = authorization.split(' ')[1];
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-        if (err) {
-            return res.statue(403).send({ message: 'You Cant Access Data, Forbidden authorization' })
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (error, decoded) => {
+        if (error) {
+            return res.status(403).send({ message: 'You Cant Access Data, Forbidden authorization' })
         }
-        // console.log('decoded', decoded);
         req.decoded = decoded;
-
+        next();
     })
-    // console.log(authorization);
-    next();
 }
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.vvsc7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
@@ -38,7 +35,6 @@ async function run() {
         const carCollections = client.db('XtremeCar').collection('cars')
 
         // all cars api
-        //http://localhost:5000/cars
         app.get('/cars', async (req, res) => {
             const query = {};
             const cursor = carCollections.find(query);
@@ -54,8 +50,8 @@ async function run() {
             })
             res.send({ accessToken })
         })
+
         //single car api
-        //http://localhost:5000/car/id
         app.get('/car/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
@@ -79,32 +75,12 @@ async function run() {
         })
 
         // Post API
-        // Data format
-        // {
-        //     "name":"Honda Civic 2022",
-        //     "img":"https://raw.githubusercontent.com/SamiulxHasanx07/xtreme-cars-images/main/cars/2022-honda-civic.jpg",
-        //     "price":"35000",
-        //     "qty":"80",
-        //     "supplier": "Honda",
-        //     "brand": "Honda"
-        //     "des":"Best wolrd wide car brand and car provider"
-        //     }
         app.post('/car', async (req, res) => {
             const data = req.body;
             const result = await carCollections.insertOne(data);
             res.send(result)
         })
 
-        // data format
-        // {
-        // "name":"Samiul Hasan",
-        // "img":"https://raw.githubusercontent.com/SamiulxHasanx07/xtreme-cars-images/main/cars/2022-honda-civic.jpg",
-        // "price":"888888",
-        // "qty":"01",
-        // "supplier": "Audi",
-        // "brand":"Audi",
-        // "des":"Best wolrd wide car brand and car provider"
-        // }
         // Update Car Details API
         app.put('/car/:id', async (req, res) => {
             const id = req.params.id;
@@ -122,10 +98,6 @@ async function run() {
         })
 
         // update single car qty
-        // data format
-        // {
-        //     "newQty":"50"
-        // }
         app.put('/carqty/:id', async (req, res) => {
             const id = req.params.id;
             const data = req.body;
@@ -155,7 +127,6 @@ async function run() {
 
     }
 }
-
 
 run().catch(console.dir)
 
