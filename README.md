@@ -1,6 +1,6 @@
 #  [Xtreme Cars Server](https://xtreme-cars-2022.herokuapp.com/)
 
-Xtreme Cars Server Details [Visit Xtreme Backend](https://xtreme-cars-2022.web.app/).
+Xtreme Cars Server Details [Visit Xtreme Backend](https://xtreme-cars-2022.herokuapp.com/).
 
 ## Technology Used (Framework, Libraries & Database):
 * NodeJS
