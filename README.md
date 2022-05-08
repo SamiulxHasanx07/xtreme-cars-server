@@ -2,7 +2,7 @@
 
 Xtreme Cars Server Details [Visit Xtreme Backend](https://xtreme-cars-2022.herokuapp.com/).
 
-## Technology Used (Framework & Database):
+## Technology Used (Framework, Database & Others):
 * NodeJS
 * ExpressJS
 * MongoDB (Database)
