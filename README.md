@@ -10,7 +10,6 @@ Xtreme Cars Server Details [Visit Xtreme Backend](https://xtreme-cars-2022.web.a
 * Heroku
 * Dot Env
 
-
 ## Xtreme Cars Features:
 * Add New Data
 * Query All Data
