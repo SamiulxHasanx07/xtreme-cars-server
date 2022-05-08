@@ -1,6 +1,6 @@
 #  [Xtreme Cars Server](https://xtreme-cars-2022.herokuapp.com/)
 
-Xtreme Cars Server Details [Visit Xtreme Backend](https://xtreme-cars-2022.herokuapp.com/):Xtreme Car is an Wolrd Wide Car Provider. Xtreme cars website have stock management facilities others like add new product, update/delete, login, registration system more & more features.
+Xtreme Cars Server Details [Visit Xtreme Backend](https://xtreme-cars-2022.herokuapp.com/): You can Find all data from database also single product data from database, delete/edit faicilites, update facilities also secure data using jwt authentication system.
 
 ## Technology Used (Framework, Database & Others):
 * NodeJS
